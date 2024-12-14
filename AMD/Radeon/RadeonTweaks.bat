@@ -28,11 +28,12 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v
 
 echo.
 echo Desactivando HAGS
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "HwSchMode" /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "HwSchMode" /t REG_DWORD /d 1 /f
 
 echo.
 echo Desactivando ULPS
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AMDKMDAG" /v "EnableUlps" /t REG_DWORD /d 0 /f
+Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AMDKMDAG" /v "EnableUlps" /t REG_DWORD /d 0 /f
+Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AMDKMDAG" /v "EnableUlps_NA" /t REG_DWORD /d 0 /f
 
 echo.
 Echo Cambios hechos, reinicia tu perfil para aplicar los cambios.
