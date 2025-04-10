@@ -1,8 +1,8 @@
 @echo off
 echo.
 echo Desactivando HPET
-wmic path Win32_PnPEntity where "name='Temporizador de eventos de alta precisión'" call disable
-wmic path Win32_PnPEntity where "name='High precision event timer'" call disable
+powershell -Command "Get-PnpDevice | Where-Object { $_.FriendlyName -like '*High Precision Event Timer*' } | Disable-PnpDevice -Confirm:$false"
+powershell -Command "Get-PnpDevice | Where-Object { $_.FriendlyName -like '*Temporizador de eventos de alta precisión*' } | Disable-PnpDevice -Confirm:$false"
 
 echo.
 echo Desinstalando msisadrv
