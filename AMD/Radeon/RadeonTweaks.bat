@@ -2,8 +2,9 @@
 
 echo.
 echo Activando DisableDynamicPstate, ShaderCache y desactivando ULPS
-for /f %%i in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PCI\VEN_"') do (
-    for /f "tokens=3" %%a in ('reg query "HKLM\SYSTEM\ControlSet001\Enum\%%i" /v "Driver"') do (
+
+for /f %%i in ('powershell -Command "Get-CimInstance Win32_VideoController | ForEach-Object { $_.PNPDeviceID }"') do (
+    for /f "tokens=3" %%a in ('reg query "HKLM\SYSTEM\ControlSet001\Enum\%%i" /v "Driver" 2^>nul') do (
         for /f %%j in ('echo %%a ^| findstr "{"') do (
             Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\%%j" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f > nul 2>&1
             Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\%%j" /v "EnableUlps" /t REG_DWORD /d "0" /f > nul 2>&1
